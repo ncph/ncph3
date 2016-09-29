@@ -23,5 +23,5 @@ cagedownconvert() {
 	return
     fi
 
-    ffmpeg -i "$1" -c:v h264 -tune film -preset slow -b:v 2400 -c:a mp3 -b:a 128 -ar 44100 "$2"
+    ffmpeg -i "$1" -c:v h264 -tune film -preset slow -b:v 2400 -c:a mp3 -b:a 128k -ar 44100 "$2"
 }
