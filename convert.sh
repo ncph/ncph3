@@ -13,7 +13,7 @@ cageconvert() {
 	return
     fi
 
-    ffmpeg -i "$1" -ss "$3" -t "${4:-60}" -c:v h264 -tune film -q:v 8 -c:a mp3 -b:a 320k -ac 2 "$2"
+    ffmpeg -i "$1" -ss "$3" -t "${4:-60}" -c:v h264 -tune film -crf 15 -c:a mp3 -b:a 320k -ac 2 "$2"
 }
 
 # Convert the intermediate near-lossless file to final form.
