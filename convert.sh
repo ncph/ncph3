@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Copyright (C) 2016 ncph Authors
+# This file is free software: You can redistribute it and/or modify it under the
+# terms of the GNU AGPLv3 or later. See COPYING for details.
+
 # Convert any video to a large file with near-lossless compression. These are
 # kept separately to allow changing the final streaming quality without touching
 # the original videos too much.
