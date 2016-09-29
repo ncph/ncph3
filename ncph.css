@@ -1,8 +1,25 @@
 /* Copyright (C) 2016 ncph Authors
  * This file is free software: You can redistribute it and/or modify it under
  * the terms of the GNU AGPLv3 or later. See COPYING for details. */
+html,
+body,
+div {
+  height: 100%;
+}
+
 body {
   background: #000;
   font-family: monospace;
   margin: 0;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#vid {
+  width: 100%;
 }
