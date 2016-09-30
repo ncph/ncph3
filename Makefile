@@ -6,7 +6,8 @@ install:
 	install -m 0644 -D ncph.css $(NCPHDIR)/ncph.css
 	install -m 0644 -D ncph.js $(NCPHDIR)/ncph.js
 	install -m 0644 -D README.md $(NCPHDIR)/README.md
-	install -m 0644 -D COPYING $(NCPHDIR)/COPYING
+	install -m 0444 -D COPYING $(NCPHDIR)/COPYING
+	install -m 0644 -D robots.txt $(NCPHDIR)/robots.txt
 
 uninstall:
 	rm -rf $(NCPHDIR)
