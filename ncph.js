@@ -53,16 +53,39 @@ var clips = [
 
 var clipDuration = 5000;
 
-// Get the clip for a given Unix timestamp (deterministic).
+// Get the permutation of clips for a given run.
 //
-// This works breaking the timestamp into blocks (the number of full sequences
-// since Epoch) and index. The block is used as a seed to generate permutations.
+// This computes a sequence such that the clips are always played in
+// random-seeming order, and very rarely more than once in any given N/2
+// sequence.
+//
+// The sequence is first permuted using the runblock (blocks of 100 runs) as the
+// seed, then split into two equal sized groups, and each group is permuted
+// again using the run as the seed. By splitting into two groups, seeing the
+// same clip twice is only possible at runblock boundaries.
+//
+function getSequence() {
+  var runBlock = run * 500;
+  var rng1 = new Lcg32(runBlock);
+  var permuted1 = shuffle(clips, rng1);
+
+  var rng2 = new Lcg32(run);
+  var mid = Math.floor(permuted1.length / 2);
+  var top = shuffle(permuted1.slice(0, mid), rng2);
+  var bot = shuffle(permuted1.slice(mid), rng2);
+  var permuted2 = top.concat(bot);
+
+  return permuted2;
+}
+
+// Get the current clip from a timestamp.
 function getClip(ts) {
   var total = Math.floor(ts / clipDuration);
-  var block = Math.floor(total / clips.length);
-  var index = total % clips.length;
-  var permuted = shuffle(clips, new Lcg32(block));
-  return permuted[index];
+  var run = Math.floor(total / clips.length);
+  var clip = total % clips.length;
+
+  var seq = getSequence(run);
+  return seq[clip];
 }
 
 var vid = document.getElementById('vid');
