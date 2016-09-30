@@ -36,36 +36,38 @@ Lcg32.prototype.gen = function() {
   return this.state / 0xFFFFFFFF;
 }
 
-var films = [
-  "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+var clips = [
+  "wicker-notthebees",
+  "zandalee-inevitable",
+  "firebirds-kiss",
+  "driveangry-disrobe",
+  "therock-gottago",
 ];
+
+var clipDuration = 5000;
 
 // Get the clip for a given Unix timestamp (deterministic).
 //
 // This works breaking the timestamp into blocks (the number of full sequences
-// since Epoch) and index. The block is used as a deterministic seed to
-// generate a permutation.
+// since Epoch) and index. The block is used as a seed to generate permutations.
 function getClip(ts) {
-  var total = Math.floor(ts / 60000);
-  var block = total % films.length;
-  var index = total / films.length;
-
-  var permuted = shuffle(films, new Lcg32(block));
+  var total = Math.floor(ts / clipDuration);
+  var block = Math.floor(total / clips.length);
+  var index = total % clips.length;
+  var permuted = shuffle(clips, new Lcg32(block));
   return permuted[index];
 }
 
 var vid = document.getElementById('vid');
 var vidCounter = 0;
 
-function playNextVid() {
-  vid.pause();
-  vid.currentSrc = "/clips/johnwick-sm.mp4";
-  vid.currentTime = 0;
+function changeVid() {
+  vid.src = "clips/" + getClip(Date.now()) + ".mp4";
   vid.play();
   ++vidCounter;
 }
 
 window.onload = function() {
-  window.setInterval(playNextVid, 10000);
-  playNextVid();
+  window.setInterval(changeVid, clipDuration);
+  changeVid();
 };
