@@ -10,8 +10,8 @@
 //
 function shuffle(orig, rng) {
   arr = orig.slice(0);
-  for (i = arr.length-1; i > 0; i--) {
-    var j = Math.floor(rng.gen() * (i+1));
+  for (i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(rng.gen() * (i + 1));
     var tmp = arr[i];
     arr[i] = arr[j];
     arr[j] = tmp;
@@ -30,18 +30,18 @@ function Lcg32(seed) {
 }
 Lcg32.prototype.advance = function() {
   this.state = (this.state * 1664525 + 1013904223) % 0xFFFFFFFF;
-}
+};
 Lcg32.prototype.gen = function() {
   this.advance();
   return this.state / 0xFFFFFFFF;
-}
+};
 
 var clips = [
-  "wicker-notthebees",
-  "zandalee-inevitable",
-  "firebirds-kiss",
-  "driveangry-disrobe",
-  "therock-gottago",
+  'wicker-notthebees',
+  'zandalee-inevitable',
+  'firebirds-kiss',
+  'driveangry-disrobe',
+  'therock-gottago',
 ];
 
 var clipDuration = 5000;
@@ -62,7 +62,7 @@ var vid = document.getElementById('vid');
 var vidCounter = 0;
 
 function changeVid() {
-  vid.src = "clips/" + getClip(Date.now()) + ".mp4";
+  vid.src = 'clips/' + getClip(Date.now()) + '.mp4';
   vid.play();
   ++vidCounter;
 }
