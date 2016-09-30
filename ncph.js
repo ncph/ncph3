@@ -10,7 +10,7 @@
 //
 function shuffle(orig, rng) {
   arr = orig.slice(0);
-  for (i = arr.length - 1; i > 0; i--) {
+  for (var i = arr.length - 1; i > 0; i--) {
     var j = Math.floor(rng.gen() * (i + 1));
     var tmp = arr[i];
     arr[i] = arr[j];
@@ -25,8 +25,8 @@ function shuffle(orig, rng) {
 //   https://en.wikipedia.org/wiki/Linear_congruential_generator
 //
 function Lcg32(seed) {
-  this.state = seed;
-  this.advance(); this.advance(); this.advance();
+  this.state = (seed + 0xad2158e3) % 0x100000000;
+  this.advance(); this.advance(); this.advance(); this.advance();
 }
 Lcg32.prototype.advance = function() {
   this.state = (this.state * 1664525 + 1013904223) % 0x100000000;
