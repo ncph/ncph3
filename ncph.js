@@ -65,9 +65,9 @@ var clipDuration = 5000;
 //
 // By maintaing distinct groups within a runblock, seeing the same clip twice in
 // a single sitting is only possible when straddling runblocks. Permuting groups
-// as well adds variation within a runblock. Within a runblock, the minimum
-// spacing between two screenings of the same clip is N-10, where N is the total
-// number of clips.
+// as well adds variation between sequential runs. Within a runblock, the
+// minimum spacing between two screenings of the same clip is N-10, where N is
+// the total number of clips.
 //
 function getSequence(run) {
   var runBlock = Math.floor(run / 100);
