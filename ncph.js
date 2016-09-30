@@ -36,6 +36,9 @@ Lcg32.prototype.gen = function() {
   return this.state / 0x100000000;
 };
 
+var vid = document.getElementById('vid');
+var vidCounter = 0;
+var clipDuration = 5000;
 var clips = [
   'wicker-notthebees',
   'zandalee-inevitable',
@@ -50,8 +53,6 @@ var clips = [
   '8mm-becausehecould',
   'adaptation-narcissistic',
 ];
-
-var clipDuration = 5000;
 
 // Get the permutation of clips for a given run.
 //
@@ -93,9 +94,7 @@ function getClip(ts) {
   return seq[clip];
 }
 
-var vid = document.getElementById('vid');
-var vidCounter = 0;
-
+// Change the clip to the one that should be playing right now.
 function changeVid() {
   vid.src = 'clips/' + getClip(Date.now()) + '.mp4';
   vid.play();
