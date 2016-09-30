@@ -55,26 +55,30 @@ var clipDuration = 5000;
 
 // Get the permutation of clips for a given run.
 //
-// This computes a sequence such that the clips are always played in
-// random-seeming order, and very rarely more than once when watching across a
-// run boundary.
+// This computes a sequence such that the clips are always played in an order
+// that appears random to humans, which very rarely should show a clip more than
+// once in a single sitting.
 //
 // The sequence is first permuted using the runblock (blocks of 100 runs) as the
 // seed, then split into groups of 10, and each group is permuted again using
-// the run as the seed. By maintaing distinct groups within a runblock, seeing
-// the same clip twice in a single sitting is only possible by straddling
-// runblock boundaries.
+// the run as the seed.
 //
-function getSequence() {
-  var runBlock = run * 100;
-  var rng1 = new Lcg32(runBlock);
-  var permuted1 = shuffle(clips, rng1);
+// By maintaing distinct groups within a runblock, seeing the same clip twice in
+// a single sitting is only possible when straddling runblocks. Permuting groups
+// as well adds variation within a runblock. Within a runblock, the minimum
+// spacing between two screenings of the same clip is N-10, where N is the total
+// number of clips.
+//
+function getSequence(run) {
+  var runBlock = Math.floor(run / 100);
+  var permuted = shuffle(clips, new Lcg32(runBlock));
 
   var rng2 = new Lcg32(run);
-  var permuted2 = []
-  for (i = 0; i < permuted1.length; i += 10) {
-    var group = permuted1.slice(i, i + 10);
-    permuted2 = permuted2.concat(shuffle(group, rng2));
+  var permuted2 = [];
+  for (var i = 0; i < permuted.length; i += 10) {
+    var group = permuted.slice(i, i + 10);
+    var shuffled = shuffle(group, rng2);
+    permuted2 = permuted2.concat(shuffled);
   }
   return permuted2;
 }
