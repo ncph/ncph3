@@ -42,13 +42,13 @@ var clips = [
   'firebirds-kiss',
   'therock-gottago',
   'driveangry-disrobe',
-  'faceoff-hallelujah.mp4',
-  'wildheart-sing.mp4',
-  'corelli-sing.mp4',
-  'leavinglas-sing.mp4',
-  'gone60s-letsride.mp4',
-  '8mm-becausehecould.mp4',
-  'adaptation-narcissistic.mp4',
+  'faceoff-hallelujah',
+  'wildheart-sing',
+  'corelli-sing',
+  'leavinglas-meet',
+  'gone60s-letsride',
+  '8mm-becausehecould',
+  'adaptation-narcissistic',
 ];
 
 var clipDuration = 5000;
