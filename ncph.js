@@ -29,7 +29,7 @@ function Lcg32(seed) {
   this.advance(); this.advance(); this.advance();
 }
 Lcg32.prototype.advance = function() {
-  this.state = (this.state * 1664525 + 1013904223) % 0x100000000;
+  this.state = (this.state * 1664525 + 1013904223) & 0xffffffff;
 };
 Lcg32.prototype.gen = function() {
   this.advance();
