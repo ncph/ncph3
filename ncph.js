@@ -40,8 +40,15 @@ var clips = [
   'wicker-notthebees',
   'zandalee-inevitable',
   'firebirds-kiss',
-  'driveangry-disrobe',
   'therock-gottago',
+  'driveangry-disrobe',
+  'faceoff-hallelujah.mp4',
+  'wildheart-sing.mp4',
+  'corelli-sing.mp4',
+  'leavinglas-sing.mp4',
+  'gone60s-letsride.mp4',
+  '8mm-becausehecould.mp4',
+  'adaptation-narcissistic.mp4',
 ];
 
 var clipDuration = 5000;
