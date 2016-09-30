@@ -60,13 +60,13 @@ var clipDuration = 5000;
 // once in a single sitting.
 //
 // The sequence is first permuted using the runblock (blocks of 100 runs) as the
-// seed, then split into groups of 10, and each group is permuted again using
+// seed, then split into groups of 6, and each group is permuted again using
 // the run as the seed.
 //
 // By maintaing distinct groups within a runblock, seeing the same clip twice in
 // a single sitting is only possible when straddling runblocks. Permuting groups
 // as well adds variation between sequential runs. Within a runblock, the
-// minimum spacing between two screenings of the same clip is N-10, where N is
+// minimum spacing between two screenings of the same clip is N-6, where N is
 // the total number of clips.
 //
 function getSequence(run) {
@@ -75,8 +75,8 @@ function getSequence(run) {
 
   var rng2 = new Lcg32(run);
   var permuted2 = [];
-  for (var i = 0; i < permuted.length; i += 10) {
-    var group = permuted.slice(i, i + 10);
+  for (var i = 0; i < permuted.length; i += 6) {
+    var group = permuted.slice(i, i + 6);
     var shuffled = shuffle(group, rng2);
     permuted2 = permuted2.concat(shuffled);
   }
