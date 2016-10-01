@@ -2,12 +2,11 @@ NCPHDIR = /usr/local/share/ncph
 
 install:
 	install -m 0644 -D index.html $(NCPHDIR)/shhhhh
-	install -m 0644 -D favicon.ico $(NCPHDIR)/favicon.ico
-	install -m 0644 -D ncph.css $(NCPHDIR)/ncph.css
-	install -m 0644 -D ncph.js $(NCPHDIR)/ncph.js
-	install -m 0644 -D README.md $(NCPHDIR)/README.md
-	install -m 0444 -D COPYING $(NCPHDIR)/COPYING
-	install -m 0644 -D robots.txt $(NCPHDIR)/robots.txt
+	install -m 0644 {COPYING,favicon.ico,ncph.css,ncph.js,README.md,robots.txt} $(NCPHDIR)
+
+publish:
+	scp index.html $(SRVNAME):$(NCPHDIR)/shhhhh
+	scp {COPYING,favicon.ico,ncph.css,ncph.js,README.md,robots.txt} $(SRVNAME):$(NCPHDIR)
 
 uninstall:
 	rm -rf $(NCPHDIR)
