@@ -46,11 +46,15 @@ function Clip(name) {
 Clip.prototype.path = function() {
   return 'clips/' + this.name + '.mp4';
 };
-Clip.prototype.play = function() {
+Clip.prototype.play = function(offset) {
   if (this.cached !== undefined) {
     vid.src = this.cached;
   } else {
-    vid.src = this.path();
+    if (offset === undefined) {
+      vid.src = this.path();
+    } else {
+      vid.src = this.path() + "#t=" + offset / 1000;
+    }
   }
   vid.play();
   ++vidCounter;
@@ -124,19 +128,19 @@ function getClip(ts) {
 }
 
 // Scheduler to be run every clipDuration milliseconds.
-function scheduleVid(state) {
-  var nextTimestamp = state.timestamp + clipDuration;
-  getClip(state.timestamp).play();
+function scheduleVid(timestamp, offset) {
+  var nextTimestamp = timestamp + clipDuration;
+  window.setTimeout(scheduleVid, clipDuration - offset, nextTimestamp, 0);
+  getClip(timestamp).play(offset);
   getClip(nextTimestamp).preload();
-  state.timestamp = nextTimestamp;
 }
 
 // Run this event at startup.
 window.onload = function() {
-  // Wrapped in an object to pass by reference between invocations.
-  var state = {timestamp: Date.now()};
-  window.setInterval(scheduleVid, clipDuration, state);
-  scheduleVid(state);
+  var timestamp = Date.now();
+  var rounded = Math.floor(timestamp / clipDuration) * clipDuration;
+  var offset = timestamp % clipDuration;
+  scheduleVid(rounded, offset);
 };
 
 // Register keyboard event handler.
