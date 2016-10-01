@@ -94,17 +94,45 @@ function getClip(ts) {
   return seq[clip];
 }
 
-// Change the clip to the one that should be playing right now.
-function changeVid() {
-  vid.src = 'clips/' + getClip(Date.now()).name + '.mp4';
+function playVid(clip) {
+  if (clip.cached !== undefined) {
+    vid.src = clip.cached;
+  } else {
+    vid.src = 'clips/' + clip.name + '.mp4';
+  }
   vid.play();
   ++vidCounter;
 }
 
+function preloadClip(clip) {
+  if (clip.cached === undefined) {
+    var req = new XMLHttpRequest();
+    req.open('GET', 'clips/' + clip.name + '.mp4', true);
+    req.responseType = 'blob';
+    req.onload = function() {
+      if (this.status === 200) {
+        clip.cached = URL.createObjectURL(this.response);
+      }
+    }
+    req.send();
+  }
+}
+
+function scheduleVid(state) {
+  var nextTimestamp = state.timestamp + clipDuration;
+  var firstClip = getClip(state.timestamp);
+  playVid(firstClip);
+  var secondClip = getClip(nextTimestamp);
+  preloadClip(secondClip);
+  state.timestamp = nextTimestamp;
+}
+
 window.onload = function() {
-  window.setInterval(changeVid, clipDuration);
-  changeVid();
-};
+  // Wrapped in an object to pass by reference between invocations.
+  var state = {timestamp: Date.now()};
+  window.setInterval(scheduleVid, clipDuration, state);
+  scheduleVid(state);
+}
 
 window.addEventListener("keydown", function (event) {
   switch (event.key) {
