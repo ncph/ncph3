@@ -38,7 +38,7 @@ Lcg32.prototype.gen = function() {
 
 var vid = document.getElementById('vid');
 var vidCounter = 0;
-var clipDuration = 5000;
+var clipDuration = 60000;
 
 function Clip(name) {
   this.name = name;
