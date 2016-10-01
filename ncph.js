@@ -39,19 +39,49 @@ Lcg32.prototype.gen = function() {
 var vid = document.getElementById('vid');
 var vidCounter = 0;
 var clipDuration = 5000;
+
+function Clip(name) {
+  this.name = name;
+}
+Clip.prototype.path = function() {
+  return 'clips/' + this.name + '.mp4';
+};
+Clip.prototype.play = function() {
+  if (this.cached !== undefined) {
+    vid.src = this.cached;
+  } else {
+    vid.src = this.path();
+  }
+  vid.play();
+  ++vidCounter;
+};
+Clip.prototype.preload = function() {
+  if (this.cached === undefined) {
+    var req = new XMLHttpRequest();
+    req.open('GET', this.path(), true);
+    req.responseType = 'blob';
+    req.onload = function() {
+      if (this.status === 200) {
+        this.cached = URL.createObjectURL(this.response);
+      }
+    };
+    req.send();
+  }
+};
+
 var clips = [
-  {name: 'wicker-notthebees'},
-  {name: 'zandalee-inevitable'},
-  {name: 'firebirds-kiss'},
-  {name: 'therock-gottago'},
-  {name: 'driveangry-disrobe'},
-  {name: 'faceoff-hallelujah'},
-  {name: 'wildheart-sing'},
-  {name: 'corelli-sing'},
-  {name: 'leavinglas-meet'},
-  {name: 'gone60s-letsride'},
-  {name: '8mm-becausehecould'},
-  {name: 'adaptation-narcissistic'},
+  new Clip('wicker-notthebees'),
+  new Clip('zandalee-inevitable'),
+  new Clip('firebirds-kiss'),
+  new Clip('therock-gottago'),
+  new Clip('driveangry-disrobe'),
+  new Clip('faceoff-hallelujah'),
+  new Clip('wildheart-sing'),
+  new Clip('corelli-sing'),
+  new Clip('leavinglas-meet'),
+  new Clip('gone60s-letsride'),
+  new Clip('8mm-becausehecould'),
+  new Clip('adaptation-narcissistic'),
 ];
 
 // Get the permutation of clips for a given run.
@@ -89,57 +119,33 @@ function getClip(ts) {
   var total = Math.floor(ts / clipDuration);
   var run = Math.floor(total / clips.length);
   var clip = total % clips.length;
-
   var seq = getSequence(run);
   return seq[clip];
 }
 
-function playVid(clip) {
-  if (clip.cached !== undefined) {
-    vid.src = clip.cached;
-  } else {
-    vid.src = 'clips/' + clip.name + '.mp4';
-  }
-  vid.play();
-  ++vidCounter;
-}
-
-function preloadClip(clip) {
-  if (clip.cached === undefined) {
-    var req = new XMLHttpRequest();
-    req.open('GET', 'clips/' + clip.name + '.mp4', true);
-    req.responseType = 'blob';
-    req.onload = function() {
-      if (this.status === 200) {
-        clip.cached = URL.createObjectURL(this.response);
-      }
-    }
-    req.send();
-  }
-}
-
+// Scheduler to be run every clipDuration milliseconds.
 function scheduleVid(state) {
   var nextTimestamp = state.timestamp + clipDuration;
-  var firstClip = getClip(state.timestamp);
-  playVid(firstClip);
-  var secondClip = getClip(nextTimestamp);
-  preloadClip(secondClip);
+  getClip(state.timestamp).play();
+  getClip(nextTimestamp).preload();
   state.timestamp = nextTimestamp;
 }
 
+// Run this event at startup.
 window.onload = function() {
   // Wrapped in an object to pass by reference between invocations.
   var state = {timestamp: Date.now()};
   window.setInterval(scheduleVid, clipDuration, state);
   scheduleVid(state);
-}
+};
 
-window.addEventListener("keydown", function (event) {
+// Register keyboard event handler.
+window.addEventListener('keydown', function(event) {
   switch (event.key) {
-  case "ArrowDown":
+  case 'ArrowDown':
     vid.volume = Math.max(0.0, vid.volume - 0.05);
     break;
-  case "ArrowUp":
+  case 'ArrowUp':
     vid.volume = Math.min(1.0, vid.volume + 0.05);
     break;
   default:
