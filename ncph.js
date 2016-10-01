@@ -50,11 +50,7 @@ Clip.prototype.play = function(offset) {
   if (this.cached !== undefined) {
     vid.src = this.cached;
   } else {
-    if (offset === undefined) {
-      vid.src = this.path();
-    } else {
-      vid.src = this.path() + "#t=" + offset / 1000;
-    }
+    vid.src = this.path() + "#t=" + offset / 1000;
   }
   vid.play();
   ++vidCounter;
