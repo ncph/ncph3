@@ -82,6 +82,12 @@ var clips = [
   new Clip('gone60s-letsride'),
   new Clip('8mm-becausehecould'),
   new Clip('adaptation-narcissistic'),
+  new Clip('guardingtess-hospital'),
+  new Clip('itcouldhappen-robbery'),
+  new Clip('gone60s-cageintro'),
+  new Clip('ghostrider-jump'),
+  new Clip('conair-howcouldi'),
+  new Clip('leavinglas-proposition'),
 ];
 
 // Get the permutation of clips for a given run.
