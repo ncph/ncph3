@@ -105,3 +105,16 @@ window.onload = function() {
   window.setInterval(changeVid, clipDuration);
   changeVid();
 };
+
+window.addEventListener("keydown", function (event) {
+  switch (event.key) {
+  case "ArrowDown":
+    vid.volume = Math.max(0.0, vid.volume - 0.05);
+    break;
+  case "ArrowUp":
+    vid.volume = Math.min(1.0, vid.volume + 0.05);
+    break;
+  default:
+    return;
+  }
+});
