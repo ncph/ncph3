@@ -1,5 +1,7 @@
 # ncph3
 
+https://github.com/ncph/ncph3/
+
 This is the software and configuation used to support the ncph interactive
 project. This is the third version of the ncph, but the first version to use web
 playback and clip randomization.
