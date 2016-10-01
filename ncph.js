@@ -44,7 +44,7 @@ function Clip(name) {
   this.name = name;
 }
 Clip.prototype.path = function() {
-  return 'clips/' + this.name + '.mp4';
+  return 'clips/opt/' + this.name + '.mp4';
 };
 Clip.prototype.play = function(offset) {
   if (this.cached !== undefined) {
