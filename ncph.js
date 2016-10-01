@@ -40,18 +40,18 @@ var vid = document.getElementById('vid');
 var vidCounter = 0;
 var clipDuration = 5000;
 var clips = [
-  'wicker-notthebees',
-  'zandalee-inevitable',
-  'firebirds-kiss',
-  'therock-gottago',
-  'driveangry-disrobe',
-  'faceoff-hallelujah',
-  'wildheart-sing',
-  'corelli-sing',
-  'leavinglas-meet',
-  'gone60s-letsride',
-  '8mm-becausehecould',
-  'adaptation-narcissistic',
+  {name: 'wicker-notthebees'},
+  {name: 'zandalee-inevitable'},
+  {name: 'firebirds-kiss'},
+  {name: 'therock-gottago'},
+  {name: 'driveangry-disrobe'},
+  {name: 'faceoff-hallelujah'},
+  {name: 'wildheart-sing'},
+  {name: 'corelli-sing'},
+  {name: 'leavinglas-meet'},
+  {name: 'gone60s-letsride'},
+  {name: '8mm-becausehecould'},
+  {name: 'adaptation-narcissistic'},
 ];
 
 // Get the permutation of clips for a given run.
@@ -96,7 +96,7 @@ function getClip(ts) {
 
 // Change the clip to the one that should be playing right now.
 function changeVid() {
-  vid.src = 'clips/' + getClip(Date.now()) + '.mp4';
+  vid.src = 'clips/' + getClip(Date.now()).name + '.mp4';
   vid.play();
   ++vidCounter;
 }
