@@ -80,14 +80,20 @@ var clips = [
   new Clip('corelli-sing'),
   new Clip('leavinglas-meet'),
   new Clip('gone60s-letsride'),
+  new Clip('boyinblue-mirin'),
+  new Clip('guardingtess-hospital'),
   new Clip('8mm-becausehecould'),
   new Clip('adaptation-narcissistic'),
-  new Clip('guardingtess-hospital'),
   new Clip('itcouldhappen-robbery'),
   new Clip('gone60s-cageintro'),
   new Clip('ghostrider-jump'),
+  new Clip('matchstick-prefex'),
+  new Clip('portofcall-pharmacy'),
   new Clip('conair-howcouldi'),
+  new Clip('boyinblue-caught'),
   new Clip('leavinglas-proposition'),
+  new Clip('natltreasure-riley'),
+  new Clip('vk-shoo'),
 ];
 
 // Get the permutation of clips for a given run.
