@@ -18,5 +18,7 @@ uninstall:
 
 nginx:
 	install -m 0644 --backup nginx.conf /etc/nginx/nginx.conf
-	sed -i "s#EOHOSTNAME#$(EOHOSTNAME)#g" /etc/nginx/nginx.conf
 	sed -i "s#NCPHHOSTNAME#$(NCPHHOSTNAME)#g" /etc/nginx/nginx.conf
+	sed -i "s#EOHOSTNAME#$(EOHOSTNAME)#g" /etc/nginx/nginx.conf
+	sed -i "s#NCPHCGIPORT#$(NCPHCGIPORT)#g" /etc/nginx/nginx.conf
+	sed -i "s#EOCGIPORT#$(EOCGIPORT)#g" /etc/nginx/nginx.conf
