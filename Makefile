@@ -2,15 +2,15 @@ NCPHDIR = /usr/local/share/ncph
 EODIR = /usr/local/share/eo
 
 install:
-	install -m 0644 -D ncph.html $(NCPHDIR)/shhhhh
+	install -m 0644 -D ncph.html $(NCPHDIR)/play
 	install -m 0644 {COPYING,favicon.ico,ncph.css,ncph.js,README.md,robots.txt} $(NCPHDIR)
-	install -m 0644 -D eo.html $(EODIR)/shhhhh
+	install -m 0644 -D eo.html $(EODIR)/play
 	install -m 0644 {COPYING,ncph.css,README.md,robots.txt} $(EODIR)
 
 publish:
-	scp ncph.html $(SRVNAME):$(NCPHDIR)/shhhhh
+	scp ncph.html $(SRVNAME):$(NCPHDIR)/play
 	scp {COPYING,favicon.ico,ncph.css,ncph.js,README.md,robots.txt} $(SRVNAME):$(NCPHDIR)
-	scp eo.html $(SRVNAME):$(EODIR)/shhhhh
+	scp eo.html $(SRVNAME):$(EODIR)/play
 	scp {COPYING,ncph.css,README.md,robots.txt} $(SRVNAME):$(EODIR)
 
 uninstall:
