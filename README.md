@@ -6,6 +6,16 @@ This is the software and configuation used to support the ncph interactive
 project. This is the third version of the ncph, but the first version to use web
 playback and clip randomization.
 
+## Contributing
+
+ncph3 uses the [Google JavaScript Style
+Guide](https://google.github.io/styleguide/javascriptguide.xml) and the [Google
+HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.xml). The
+Closure Linter can be used to check and fix JavaScript style problems.
+
+In general, follow [these rules](http://chris.beams.io/posts/git-commit/) when
+writing commit messages.
+
 ## Copying
 
 Copyright (C) 2016 ncph Authors
