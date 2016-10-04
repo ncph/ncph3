@@ -56,6 +56,8 @@ Clip.prototype.play = function(offset) {
     vid.src = this.path() + '#t=' + offset / 1000;
   }
   vid.play();
+  var noun = (vidCounter === 1) ? 'clip' : 'clips';
+  document.getElementById('topleft').innerHTML = vidCounter + ' ' + noun + ' seen';
   ++vidCounter;
 };
 Clip.prototype.preload = function() {
@@ -161,7 +163,8 @@ function makeRequest() {
       var offset = startingTimestamp % clipDuration;
       scheduleVid(rounded, offset);
     }
-    viewers = response.querySelector('viewers').innerHTML;
+    var button = document.getElementById('topright');
+    button.innerHTML = response.querySelector('viewers').innerHTML + ' people watching';
   };
   xhr.open('GET', 'cgi');
   xhr.responseType = 'document';
