@@ -163,8 +163,9 @@ function makeRequest() {
       var offset = startingTimestamp % clipDuration;
       scheduleVid(rounded, offset);
     }
-    var button = document.getElementById('topright');
-    button.innerHTML = response.querySelector('viewers').innerHTML + ' people watching';
+    var viewers = response.querySelector('viewers').innerHTML;
+    var noun = (viewers === '1') ? 'person' : 'people';
+    document.getElementById('topright').innerHTML = viewers + ' ' + noun + ' watching';
   };
   xhr.open('GET', 'cgi');
   xhr.responseType = 'document';
