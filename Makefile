@@ -16,16 +16,16 @@ publish:
 uninstall:
 	rm -rf $(NCPHDIR) $(EODIR)
 
-nginx:
+ncph-server:
+	go build -o $@ server.go
+
+root-install: ncph-server
 	install -m 0644 --backup nginx.conf /etc/nginx/nginx.conf
 	sed -i "s#NCPHHOSTNAME#$(NCPHHOSTNAME)#g" /etc/nginx/nginx.conf
 	sed -i "s#EOHOSTNAME#$(EOHOSTNAME)#g" /etc/nginx/nginx.conf
 	sed -i "s#NCPHCGIPORT#$(NCPHCGIPORT)#g" /etc/nginx/nginx.conf
 	sed -i "s#EOCGIPORT#$(EOCGIPORT)#g" /etc/nginx/nginx.conf
-
-ncph-server:
-	go build server.go
-	install -m 0755 ncph3 /usr/local/bin/ncph-server
+	install -m 0755 ncph-server /usr/local/bin/ncph-server
 	install -m 0644 ncph.service /lib/systemd/system/ncph.service
 	install -m 0644 ncph.service /lib/systemd/system/eo.service
 	sed -i "s#PORT#$(NCPHCGIPORT)#g" /lib/systemd/system/ncph.service
