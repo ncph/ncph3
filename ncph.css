@@ -19,3 +19,27 @@ body {
 #vid {
   width: 100%;
 }
+
+button {
+  background-color: #fff;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+  font: bold 12px sans-serif;
+  text-transform: uppercase;
+  margin: auto;
+  padding: 8px;
+  opacity: 0.77;
+}
+
+#topleft {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+#topright {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
