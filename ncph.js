@@ -173,7 +173,7 @@ function makeRequest() {
 
 // Run this event at startup.
 window.addEventListener('load', function() {
-  window.setInterval(makeRequest, 10000);
+  window.setInterval(makeRequest, 15000);
   makeRequest();
 });
 

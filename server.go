@@ -26,7 +26,7 @@ var lastVisit = make(map[string]time.Time)
 func cgi(w http.ResponseWriter, r *http.Request) {
 	// TODO: Use sorted list instead, to prevent O(n) check.
 	for visitor, visit := range lastVisit {
-		if time.Since(visit) > 30*time.Second {
+		if time.Since(visit) > 20*time.Second {
 			delete(lastVisit, visitor)
 		}
 	}
