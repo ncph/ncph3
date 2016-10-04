@@ -22,3 +22,13 @@ nginx:
 	sed -i "s#EOHOSTNAME#$(EOHOSTNAME)#g" /etc/nginx/nginx.conf
 	sed -i "s#NCPHCGIPORT#$(NCPHCGIPORT)#g" /etc/nginx/nginx.conf
 	sed -i "s#EOCGIPORT#$(EOCGIPORT)#g" /etc/nginx/nginx.conf
+
+ncph-server:
+	go build server.go
+	install -m 0755 ncph3 /usr/local/bin/ncph-server
+	install -m 0644 ncph.service /lib/systemd/system/ncph.service
+	install -m 0644 ncph.service /lib/systemd/system/eo.service
+	sed -i "s#PORT#$(NCPHCGIPORT)#g" /lib/systemd/system/ncph.service
+	sed -i "s#PORT#$(EOCGIPORT)#g" /lib/systemd/system/eo.service
+	systemctl enable ncph
+	systemctl enable eo

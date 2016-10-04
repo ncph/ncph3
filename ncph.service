@@ -1,0 +1,9 @@
+[Unit]
+Description=Dynamic content for ncph
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/ncph-server -bindaddr :PORT
+
+[Install]
+WantedBy=multi-user.target
