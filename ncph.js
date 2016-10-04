@@ -49,6 +49,7 @@ Clip.prototype.path = function() {
   return 'clips/opt/' + this.name + '.mp4';
 };
 Clip.prototype.play = function(offset) {
+  vid.pause();
   if (this.cached !== undefined) {
     vid.src = this.cached;
   } else {
@@ -155,7 +156,7 @@ function makeRequest() {
   xhr.onload = function() {
     var response = xhr.responseXML.documentElement;
     if (startingTimestamp === undefined) {
-      var startingTimestamp = response.querySelector('timestamp').innerHTML;
+      startingTimestamp = response.querySelector('timestamp').innerHTML;
       var rounded = Math.floor(startingTimestamp / clipDuration) * clipDuration;
       var offset = startingTimestamp % clipDuration;
       scheduleVid(rounded, offset);
