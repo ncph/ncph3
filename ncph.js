@@ -144,12 +144,12 @@ function scheduleVid(timestamp, offset) {
 }
 
 // Run this event at startup.
-window.onload = function() {
+window.addEventListener('load', function() {
   var timestamp = Date.now();
   var rounded = Math.floor(timestamp / clipDuration) * clipDuration;
   var offset = timestamp % clipDuration;
   scheduleVid(rounded, offset);
-};
+});
 
 // Register keyboard event handler.
 window.addEventListener('keydown', function(event) {
