@@ -107,6 +107,7 @@ var clips = [
   new Clip('weatherman-frosty'),
   new Clip('knowing-shithappens'),
   new Clip('vk-shoo'),
+  new Clip('nevertuesday-cage'),
   new Clip('raising-sorry'),
   new Clip('faceoff-bigride'),
   new Clip('wicker-burned'),
