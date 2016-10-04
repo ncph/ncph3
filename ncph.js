@@ -39,6 +39,8 @@ Lcg32.prototype.gen = function() {
 var vid = document.getElementById('vid');
 var vidCounter = 0;
 var clipDuration = 60000;
+var startingTimestamp;
+var viewers;
 
 function Clip(name) {
   this.name = name;
@@ -50,7 +52,7 @@ Clip.prototype.play = function(offset) {
   if (this.cached !== undefined) {
     vid.src = this.cached;
   } else {
-    vid.src = this.path() + "#t=" + offset / 1000;
+    vid.src = this.path() + '#t=' + offset / 1000;
   }
   vid.play();
   ++vidCounter;
@@ -143,12 +145,32 @@ function scheduleVid(timestamp, offset) {
   getClip(nextTimestamp).preload();
 }
 
+// Send a request to the backend. This is used for two things:
+//
+//   * If running for the first time, starts the video scheduling loop.
+//   * Updates the viewer count.
+//
+function makeRequest() {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var response = xhr.responseXML.documentElement;
+    if (startingTimestamp === undefined) {
+      var startingTimestamp = response.querySelector('timestamp').innerHTML;
+      var rounded = Math.floor(startingTimestamp / clipDuration) * clipDuration;
+      var offset = startingTimestamp % clipDuration;
+      scheduleVid(rounded, offset);
+    }
+    viewers = response.querySelector('viewers').innerHTML;
+  };
+  xhr.open('GET', 'cgi');
+  xhr.responseType = 'document';
+  xhr.send();
+}
+
 // Run this event at startup.
 window.addEventListener('load', function() {
-  var timestamp = Date.now();
-  var rounded = Math.floor(timestamp / clipDuration) * clipDuration;
-  var offset = timestamp % clipDuration;
-  scheduleVid(rounded, offset);
+  window.setInterval(makeRequest, 10000);
+  makeRequest();
 });
 
 // Register keyboard event handler.
