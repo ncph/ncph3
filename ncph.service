@@ -3,7 +3,7 @@ Description=Dynamic content for ncph
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/ncph-server -bindaddr :PORT
+ExecStart=/usr/local/bin/ncph-server -bindaddr 127.0.0.1:PORT
 
 [Install]
 WantedBy=multi-user.target
