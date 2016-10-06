@@ -16,7 +16,7 @@ publish:
 uninstall:
 	rm -rf $(NCPHDIR) $(EODIR)
 
-ncph-server:
+ncph-server: server.go
 	go build -o $@ server.go
 
 root-install: ncph-server
