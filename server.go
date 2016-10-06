@@ -37,14 +37,7 @@ func cgi(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	port := r.Header.Get("X-Forwarded-Port")
-	if port == "" {
-		http.Error(w, "Required header X-Forwarded-Port missing", 500)
-		return
-	}
-
-	requester := address + ":" + port
-	lastVisit[requester] = time.Now()
+	lastVisit[address] = time.Now()
 	timestamp := time.Now().UnixNano() / 1000000
 
 	w.Header().Set("Content-Type", "text/xml")
