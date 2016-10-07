@@ -13,8 +13,8 @@ Guide](https://google.github.io/styleguide/javascriptguide.xml) and the [Google
 HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.xml). The
 Closure Linter can be used to check and fix JavaScript style problems.
 
-In general, follow [these rules](http://chris.beams.io/posts/git-commit/) when
-writing commit messages.
+In general, follow [Chris Beams's
+rules](http://chris.beams.io/posts/git-commit/) for writing commit messages.
 
 ## Copying
 
