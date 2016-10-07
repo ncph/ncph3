@@ -130,9 +130,9 @@ var clips = [
 // seed, then split into groups of 6, and each group is permuted again using
 // the run as the seed.
 //
-// By maintaing distinct groups within a runblock, seeing the same clip twice in
-// a single sitting is only possible when straddling runblocks. Permuting groups
-// as well adds variation between sequential runs. Within a runblock, the
+// By maintaining distinct groups within a runblock, seeing the same clip twice
+// in a single sitting is only possible when straddling runblocks. Permuting
+// groups as well adds variation between sequential runs. Within a runblock, the
 // minimum spacing between two screenings of the same clip is N-6, where N is
 // the total number of clips.
 //
