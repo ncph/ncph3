@@ -183,8 +183,13 @@ function makeRequest() {
       scheduleVid(rounded, offset);
     }
     var viewers = response.querySelector('viewers').innerHTML;
-    var noun = (viewers === '1') ? 'person' : 'people';
-    document.getElementById('topright').innerHTML = viewers + ' ' + noun + ' watching';
+    var button = document.getElementById('topright');
+    if (viewers < 2) {
+      button.className = 'hidden';
+    } else {
+      button.className = '';
+      button.innerHTML = viewers + ' people watching';
+    }
   };
   xhr.open('GET', 'cgi');
   xhr.responseType = 'document';

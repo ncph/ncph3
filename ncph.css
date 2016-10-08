@@ -32,6 +32,10 @@ button {
   opacity: 0.58;
 }
 
+.hidden {
+  display: none;
+}
+
 #topleft {
   position: absolute;
   top: 24px;
