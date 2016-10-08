@@ -126,7 +126,7 @@ var clips = [
 // that appears random to humans, which very rarely should show a clip more than
 // once in a single sitting.
 //
-// The sequence is first permuted using the runblock (blocks of 100 runs) as the
+// The sequence is first permuted using the runblock (blocks of 128 runs) as the
 // seed, then split into groups of 4, and each group is permuted again using
 // the run as the seed.
 //
@@ -137,7 +137,7 @@ var clips = [
 // the total number of clips.
 //
 function getSequence(run) {
-  var runBlock = Math.floor(run / 100);
+  var runBlock = Math.floor(run / 128);
   var permuted = shuffle(clips, new Lcg32(runBlock));
 
   var rng2 = new Lcg32(run);
