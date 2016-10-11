@@ -23,5 +23,5 @@ cagedownconvert() {
 	return
     fi
 
-    ffmpeg -i "$1" -c:v h264 -tune film -preset veryfast -profile:v baseline -level 3.1 -vf scale=-2:480 -pix_fmt yuv420p -minrate 600k -maxrate 1000k -bufsize 2500k -c:a mp3 -b:a 128k -ar 44100 "$2"
+    ffmpeg -i "$1" -c:v h264 -tune film -preset slow -profile:v baseline -level 3.1 -vf scale=-2:480 -pix_fmt yuv420p -minrate 740k -maxrate 960k -c:a mp3 -b:a 128k -ar 44100 "$2"
 }
