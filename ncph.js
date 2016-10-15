@@ -61,13 +61,14 @@ Clip.prototype.play = function(offset) {
   ++vidCounter;
 };
 Clip.prototype.preload = function() {
+  var clip = this;
   if (this.cached === undefined) {
     var req = new XMLHttpRequest();
-    req.open('GET', this.path(), true);
+    req.open('GET', clip.path(), true);
     req.responseType = 'blob';
     req.onload = function() {
       if (this.status === 200) {
-        this.cached = URL.createObjectURL(this.response);
+        clip.cached = URL.createObjectURL(this.response);
       }
     };
     req.send();
