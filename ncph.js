@@ -139,6 +139,20 @@ var clips = [
   new Clip('weatherman-fastfood'),
   new Clip('matchstick-cleaning'),
   new Clip('matchstick-carpets'),
+  new Clip('zandalee-black.mp4'),
+  new Clip('ghostrider-soul.mp4'),
+  new Clip('nattres2-haggis'),
+  new Clip('trust-open'),
+  new Clip('moonstruck-ring')
+  new Clip('moonstruck-opera')
+  new Clip('moonstruck-wolf')
+  new Clip('season-death')
+  new Clip('season-fight')
+  new Clip('season-god')
+  new Clip('season-dream')
+  new Clip('bangkok-water')
+  new Clip('bangkok-lesson')
+  new Clip('bangkok-date')
 ];
 
 // Get the permutation of clips for a given run.
